@@ -42,9 +42,9 @@ public class ItalianSeoStopWordCleaner extends RegExpSeoStopWordCleaner {
 			"nostro", "nove", "nuovi", "nuovo", "o", "oltre", "ora", "otto",
 			"peggio", "pero", "persone", "piu", "poco", "primo", "promesso",
 			"qua", "quarto", "quasi", "quattro", "quello", "questo", "qui",
-			"quindi", "quinto", "rispetto", "sara", "secondo", "sei",
-			"sembra 	", "sembrava", "senza", "sette", "sia", "siamo", "siete",
-			"solo", "sono", "sopra", "soprattutto", "sotto", "stati", "stato",
+			"quindi", "quinto", "rispetto", "sara", "secondo", "sei", "sembra",
+			"sembrava", "senza", "sette", "sia", "siamo", "siete", "solo",
+			"sono", "sopra", "soprattutto", "sotto", "stati", "stato",
 			"stesso", "su", "subito", "sul", "sulla", "tanto", "te", "tempo",
 			"terzo", "tra", "tre", "triplo", "ultimo", "un", "una", "uno",
 			"va", "vai", "voi", "volte", "vostro" };
