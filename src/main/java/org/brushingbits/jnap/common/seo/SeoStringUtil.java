@@ -67,11 +67,11 @@ public class SeoStringUtil {
 	/**
 	 * 
 	 * @param src
-	 * @param cleanUnusefulWords
+	 * @param cleanStopWords
 	 * @return
 	 */
-	public static String makeSeoFriendly(String src, boolean cleanUnusefulWords) {
-		return makeSeoFriendly(src, cleanUnusefulWords ? Locale.getDefault() : null);
+	public static String makeSeoFriendly(String src, boolean cleanStopWords) {
+		return makeSeoFriendly(src, cleanStopWords ? Locale.getDefault() : null);
 	}
 
 	/**
