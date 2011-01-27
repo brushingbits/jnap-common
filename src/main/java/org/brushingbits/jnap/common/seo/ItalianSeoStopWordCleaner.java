@@ -53,7 +53,7 @@ public class ItalianSeoStopWordCleaner extends RegExpSeoStopWordCleaner {
 		return SUPPORTED_LOCALES;
 	}
 
-	public String[] getSeoUnusefulWords() {
+	public String[] getSeoStopWords() {
 		return STOP_WORDS;
 	}
 

@@ -33,7 +33,7 @@ public abstract class RegExpSeoStopWordCleaner implements SeoStopWordCleaner {
 
 	private static Pattern WORD_CLEANER_REGEXP;
 
-	public abstract String[] getSeoUnusefulWords();
+	public abstract String[] getSeoStopWords();
 
 	/* (non-Javadoc)
 	 * @see org.brushingbits.jnap.common.seo.SeoStopWordCleaner#removeWords(java.lang.String)
@@ -41,7 +41,7 @@ public abstract class RegExpSeoStopWordCleaner implements SeoStopWordCleaner {
 	public String clean(String str) {
 		if (WORD_CLEANER_REGEXP == null) {
 			WORD_CLEANER_REGEXP = Pattern.compile(MessageFormat.format("\\b({0})\\b",
-					StringUtils.join(getSeoUnusefulWords(), '|')), Pattern.CASE_INSENSITIVE);
+					StringUtils.join(getSeoStopWords(), '|')), Pattern.CASE_INSENSITIVE);
 		}
 		Matcher unusefulWordsMatcher = WORD_CLEANER_REGEXP.matcher(str);
 		return unusefulWordsMatcher.replaceAll(StringUtils.EMPTY);
