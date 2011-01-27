@@ -31,22 +31,22 @@ public class GermanSeoStopWordCleaner extends RegExpSeoStopWordCleaner {
 
 	private static final String[] STOP_WORDS = new String[] { "aber", "als",
 			"am", "an", "auch", "auf", "aus", "bei", "bin", "bis", "bist",
-			"da", "dadurch", "daher", "darum", "das", "daﬂ", "dass", "dein",
-			"deine", "dem", "den", "der", "des", "dessen", "deshalb", "die",
-			"dies", "dieser", "dieses", "doch", "dort", "du", "durch", "ein",
-			"eine", "einem", "einen", "einer", "eines", "er", "es", "euer",
-			"eure", "fur", "hatte", "hatten", "hattest", "hattet", "hier 	",
-			"hinter", "ich", "ihr", "ihre", "im", "in", "ist", "ja", "jede",
-			"jedem", "jeden", "jeder", "jedes", "jener", "jenes", "jetzt",
-			"kann", "kannst", "konnen", "konnt", "machen", "mein", "meine",
-			"mit", "muﬂ", "muﬂt", "musst", "mussen", "nach", "nachdem", "nein",
-			"nicht", "nun", "oder", "seid", "sein", "seine", "sich", "sie",
-			"sind", "soll", "sollen", "sollst", "sollt", "sonst", "soweit",
-			"sowie", "und", "unser 	", "unsere", "unter", "vom", "von", "vor",
-			"wann", "warum", "was", "weiter", "weitere", "wenn", "wer",
-			"werde", "werden", "werdet", "weshalb", "wie", "wieder", "wieso",
-			"wir", "wird", "wirst", "wo", "woher", "wohin", "zu", "zum", "zur",
-			"uber" };
+			"da", "dadurch", "daher", "darum", "das", "da\u00DF", "dass",
+			"dein", "deine", "dem", "den", "der", "des", "dessen", "deshalb",
+			"die", "dies", "dieser", "dieses", "doch", "dort", "du", "durch",
+			"ein", "eine", "einem", "einen", "einer", "eines", "er", "es",
+			"euer", "eure", "fur", "hatte", "hatten", "hattest", "hattet",
+			"hier 	", "hinter", "ich", "ihr", "ihre", "im", "in", "ist", "ja",
+			"jede", "jedem", "jeden", "jeder", "jedes", "jener", "jenes",
+			"jetzt", "kann", "kannst", "konnen", "konnt", "machen", "mein",
+			"meine", "mit", "mu\u00DF", "mu\u00DFt", "musst", "mussen", "nach",
+			"nachdem", "nein", "nicht", "nun", "oder", "seid", "sein", "seine",
+			"sich", "sie", "sind", "soll", "sollen", "sollst", "sollt",
+			"sonst", "soweit", "sowie", "und", "unser 	", "unsere", "unter",
+			"vom", "von", "vor", "wann", "warum", "was", "weiter", "weitere",
+			"wenn", "wer", "werde", "werden", "werdet", "weshalb", "wie",
+			"wieder", "wieso", "wir", "wird", "wirst", "wo", "woher", "wohin",
+			"zu", "zum", "zur", "uber" };
 
 	public Locale[] getSupportedLocales() {
 		return SUPPORTED_LOCALES;
