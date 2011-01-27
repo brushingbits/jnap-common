@@ -30,6 +30,7 @@ import java.util.Date;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -111,7 +112,7 @@ public class BeanCloner {
 		this(BeanPropertyFilter.getDefault());
 	}
 
-	Object copy(Object source) {
+	public Object clone(Object source) {
 		Object copy = null;
 		if (source != null) {
 			final String currentPath = getCurrentPath();
@@ -130,11 +131,11 @@ public class BeanCloner {
 				if (isStandardType(type)) {
 					copy = source;
 				} else if (type.isArray()) {
-					copy = copyArray((Object[]) source, type);
+					copy = cloneArray((Object[]) source, type);
 				} else if (Collection.class.isAssignableFrom(type)) {
-					copy = copyCollection((Collection<?>) source, type);
+					copy = cloneCollection((Collection<?>) source, type);
 				} else if (Map.class.isAssignableFrom(type)) {
-					copy = copyMap((Map<?, ?>) source, type);
+					copy = cloneMap((Map<?, ?>) source, type);
 				} else {
 					// so, we assume it's a nested bean (let's go 'down' another level)
 					if (context.wasAlreadyVisited(source) && this.preventCircularVisiting) {
@@ -144,7 +145,7 @@ public class BeanCloner {
 					} else {
 						context.nextLevel();
 						if (isValidDepth()) {
-							copy = copyBean(source, type);
+							copy = cloneBean(source, type);
 						}
 						context.prevLevel();
 					}
@@ -162,7 +163,7 @@ public class BeanCloner {
 		return propertyFilter.getDepth() == -1 || context.getCurrentLevel() <= propertyFilter.getDepth();
 	}
 
-	private Object copyBean(Object bean, Class<?> type) {
+	private Object cloneBean(Object bean, Class<?> type) {
 		BeanWrapper source = PropertyAccessorFactory.forBeanPropertyAccess(bean);
 		BeanWrapper copy = PropertyAccessorFactory.forBeanPropertyAccess(BeanUtils.instantiate(type));
 
@@ -176,7 +177,7 @@ public class BeanCloner {
 			context.pushPath(name);
 			if (copy.isReadableProperty(name) && copy.isWritableProperty(name)) {
 				Object value = source.getPropertyValue(name);
-				copy.setPropertyValue(name, copy(value));
+				copy.setPropertyValue(name, clone(value));
 			}
 			context.popPath();
 		}
@@ -186,18 +187,18 @@ public class BeanCloner {
 		return beanCopy;
 	}
 
-	private Object[] copyArray(Object[] array, Class<?> type) {
+	private Object[] cloneArray(Object[] array, Class<?> type) {
 		Object[] arrayCopy = (Object[]) Array.newInstance(type, array.length);
 		for (int i = 0; i < array.length; i++) {
-			arrayCopy[i] = copy(array[i]);
+			arrayCopy[i] = clone(array[i]);
 		}
 		return arrayCopy;
 	}
 
-	private Collection<?> copyCollection(Collection<?> collection,	Class<?> type) {
+	private Collection<?> cloneCollection(Collection<?> collection,	Class<?> type) {
 		Collection<Object> collectionCopy = (Collection<Object>) BeanUtils.instantiate(type);
 		for (Object item : collection) {
-			collectionCopy.add(copy(item));
+			collectionCopy.add(clone(item));
 		}
 		CollectionUtils.filter(collectionCopy, PredicateUtils.notNullPredicate());
 		if (collectionCopy.isEmpty()) {
@@ -206,11 +207,11 @@ public class BeanCloner {
 		return collectionCopy;
 	}
 
-	private Map<Object, Object> copyMap(Map<?, ?> map, Class<?> type) {
+	private Map<Object, Object> cloneMap(Map<?, ?> map, Class<?> type) {
 		Map<Object, Object> mapCopy = (Map<Object, Object>) BeanUtils.instantiate(type);
 		for (Object key : map.keySet()) {
 			Object value = map.get(key);
-			mapCopy.put(copy(key), copy(value));
+			mapCopy.put(clone(key), clone(value));
 		}
 		return mapCopy;
 	}
@@ -286,6 +287,11 @@ public class BeanCloner {
 		private Deque<String> currentPath;
 		private List<Object> alreadyVisited;
 
+		public VisitorContext() {
+			this.currentPath = new LinkedList<String>();
+			this.alreadyVisited = new ArrayList<Object>();
+		}
+
 		public int getCurrentLevel() {
 			return currentLevel;
 		}
@@ -304,8 +310,7 @@ public class BeanCloner {
 
 		public String getCurrentPathRepresentation() {
 			StringBuilder path = new StringBuilder();
-			for (Iterator<String> iter = currentPath.descendingIterator(); iter
-					.hasNext();) {
+			for (Iterator<String> iter = currentPath.descendingIterator(); iter.hasNext();) {
 				path.append(iter.next());
 				if (iter.hasNext()) {
 					path.append(".");
